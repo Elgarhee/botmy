@@ -1,9 +1,9 @@
-pip install pyrogram
-pip install tgcrypto
-from pyrogram import Client, filters
 import logging
+import asyncio
 import io
 import contextlib
+from pyrogram import Client, filters
+from pyrogram.errors import FloodWait
 
 logging.basicConfig(level=logging.INFO)
 
@@ -21,7 +21,6 @@ async def start(client, message):
 async def run_code(client, message):
     code = message.text
     
-    # Executing the code
     exec_globals = {}
     output = io.StringIO()
     with contextlib.redirect_stdout(output):
